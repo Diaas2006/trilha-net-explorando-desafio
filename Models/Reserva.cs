@@ -1,5 +1,8 @@
 namespace DesafioProjetoHospedagem.Models
 {
+    /// <summary>
+    /// Classe para reserva de suíte
+    /// </summary>
     public class Reserva
     {
         public List<Pessoa> Hospedes { get; set; }
@@ -15,16 +18,13 @@ namespace DesafioProjetoHospedagem.Models
 
         public void CadastrarHospedes(List<Pessoa> hospedes)
         {
-            // TODO: Verificar se a capacidade é maior ou igual ao número de hóspedes sendo recebido
-            // *IMPLEMENTE AQUI*
-            if (true)
+            if (hospedes.Count <= Suite.Capacidade)
             {
                 Hospedes = hospedes;
             }
             else
             {
-                // TODO: Retornar uma exception caso a capacidade seja menor que o número de hóspedes recebido
-                // *IMPLEMENTE AQUI*
+                throw new Exception("A capacidade de hóspedes não pode ultrapassar a quantidade da suíte.");
             }
         }
 
@@ -35,23 +35,19 @@ namespace DesafioProjetoHospedagem.Models
 
         public int ObterQuantidadeHospedes()
         {
-            // TODO: Retorna a quantidade de hóspedes (propriedade Hospedes)
-            // *IMPLEMENTE AQUI*
-            return 0;
+            int quantidadeHospedes = Hospedes.Count;
+            return quantidadeHospedes;
         }
 
         public decimal CalcularValorDiaria()
         {
-            // TODO: Retorna o valor da diária
-            // Cálculo: DiasReservados X Suite.ValorDiaria
-            // *IMPLEMENTE AQUI*
-            decimal valor = 0;
+            decimal calculoDiaria = this.DiasReservados * Suite.ValorDiaria;
+            decimal valor = calculoDiaria;
 
-            // Regra: Caso os dias reservados forem maior ou igual a 10, conceder um desconto de 10%
-            // *IMPLEMENTE AQUI*
-            if (true)
+            if(this.DiasReservados >= 10)
             {
-                valor = 0;
+                decimal calculoDiariaComDesconto = calculoDiaria - (calculoDiaria * (decimal)0.10); //uso de casting pra converção de double pra decimal
+                valor = calculoDiariaComDesconto;
             }
 
             return valor;
